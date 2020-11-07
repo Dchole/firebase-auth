@@ -2,15 +2,10 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 
-interface IFormValues {
-  email: string;
-  password: string;
-}
-
 const Register = () => {
   const { replace } = useHistory();
-
-  const [values, setValues] = useState<IFormValues>({
+  const [loading, setLoading] = useState(false);
+  const [values, setValues] = useState({
     email: "",
     password: ""
   });
@@ -26,6 +21,7 @@ const Register = () => {
     event.preventDefault();
 
     try {
+      setLoading(true);
       await firebase
         .auth()
         .signInWithEmailAndPassword(values.email, values.password);
@@ -36,6 +32,8 @@ const Register = () => {
       const errorMessage = error.message;
 
       console.log({ errorCode, errorMessage });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,7 +65,7 @@ const Register = () => {
             />
           </label>
         </fieldset>
-        <button type="submit">Sign in</button>
+        <button type="submit">{loading ? "Loading..." : "Sign in"}</button>
         <div id="links">
           <Link to="/forgot-password">Forgot Password?</Link>
           <Link to="/register">Don't have an account? Register</Link>

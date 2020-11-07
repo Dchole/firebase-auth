@@ -2,14 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import firebase from "firebase/app";
 
-interface IFormValues {
-  fullName: string;
-  email: string;
-  password: string;
-}
-
 const Register = () => {
-  const [values, setValues] = useState<IFormValues>({
+  const [loading, setLoading] = useState(false);
+  const [values, setValues] = useState({
     fullName: "",
     email: "",
     password: ""
@@ -26,10 +21,12 @@ const Register = () => {
     event.preventDefault();
 
     try {
+      setLoading(true);
       const { user } = await firebase
         .auth()
         .createUserWithEmailAndPassword(values.email, values.password);
 
+      await user?.sendEmailVerification();
       await user?.updateProfile({
         displayName: values.fullName
       });
@@ -38,6 +35,8 @@ const Register = () => {
       const errorMessage = error.message;
 
       console.log({ errorCode, errorMessage });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -83,7 +82,7 @@ const Register = () => {
             />
           </label>
         </fieldset>
-        <button type="submit">Sign up</button>
+        <button type="submit">{loading ? "Loading..." : "Sign up"}</button>
         <div id="links">
           <Link to="/login">Already have an account? Login</Link>
         </div>
