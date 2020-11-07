@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./pages/home";
 import Login from "./components/login";
-import Register from "./components/login";
+import Register from "./components/register";
 import UserContextProvider from "./UserContext";
 
 const App = () => (

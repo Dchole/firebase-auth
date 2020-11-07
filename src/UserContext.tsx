@@ -17,17 +17,15 @@ const UserContextProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        setUser(user);
-        setUserExists(true);
-      } else {
-        replace("/login");
-        setUserExists(false);
-      }
+      user && setUser(user);
+      setUserExists(Boolean(user));
     });
   }, [replace]);
 
-  const handleLogout = () => firebase.auth().signOut();
+  const handleLogout = () => {
+    firebase.auth().signOut();
+    replace("/login");
+  };
 
   return (
     <UserContext.Provider value={{ user, userExists, handleLogout }}>
