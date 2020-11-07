@@ -1,3 +1,8 @@
+:root {
+  --blue: #07f;
+  --spacing: 8px;
+}
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -34,7 +39,9 @@ button {
   cursor: pointer;
   transition: ease-in 100ms;
   text-transform: uppercase;
+  font-weight: 500;
 }
+
 main button {
   background-color: tomato;
 }
@@ -53,6 +60,7 @@ header {
 header button:first-child {
   background-color: teal;
 }
+
 header button:first-child:hover {
   background-color: #008080cc;
 }
@@ -67,20 +75,54 @@ header button:last-child:hover {
   background-color: #fff5;
 }
 
-form {
+#auth {
   background-color: white;
   border: 2px solid silver;
   padding: 16px;
-  border-radius: 8px;
+  border-radius: var(--spacing);
   max-width: 420px;
+  height: fit-content;
+  margin: auto;
+  margin-top: 100px;
+}
+
+#auth #divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 12px auto var(--spacing);
+}
+
+#auth #divider hr {
+  width: 45%;
+  border: none;
+  border-top: 1px solid silver;
+}
+
+#auth #divider span {
+  margin: var(--spacing);
+}
+
+#auth section button {
+  color: white;
+  margin-top: 16px;
+  background-color: var(--blue);
+  transition: ease-out 100ms;
+}
+
+#auth section button:hover {
+  background-color: steelblue;
+}
+
+form {
   display: grid;
   place-items: center;
 }
 
 form fieldset {
-  padding: 16px;
-  margin-bottom: 8px;
-  border: 2px solid #cacaca;
+  padding: 16px 16px;
+  margin-bottom: var(--spacing);
+  border: 2px solid #d9d6d6a6;
 }
 
 form fieldset legend {
@@ -91,12 +133,12 @@ form fieldset legend {
 form input {
   width: 100%;
   padding: 6px 10px;
-  margin: 4px auto;
+  margin: 4px auto 16px;
   font-size: medium;
 }
 
 form button[type="submit"] {
-  margin: 8px auto;
+  margin: var(--spacing) auto 10px;
   width: 100%;
 }
 
@@ -105,6 +147,16 @@ form #links {
   display: flex;
   gap: 16px;
   justify-content: space-between;
+  margin-top: var(--spacing);
+}
+
+form #links a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+form #links a:hover {
+  text-decoration: underline;
 }
 
 form #links a:last-child {

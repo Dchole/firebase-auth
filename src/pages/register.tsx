@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import firebase from "firebase/app";
+import Providers from "../components/providers";
+
+const style: React.CSSProperties = {
+  justifyContent: "flex-end"
+};
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -41,7 +46,7 @@ const Register = () => {
   };
 
   return (
-    <main>
+    <Providers>
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Account details</legend>
@@ -83,11 +88,11 @@ const Register = () => {
           </label>
         </fieldset>
         <button type="submit">{loading ? "Loading..." : "Sign up"}</button>
-        <div id="links">
+        <div id="links" style={style}>
           <Link to="/login">Already have an account? Login</Link>
         </div>
       </form>
-    </main>
+    </Providers>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import firebase from "firebase/app";
+import Providers from "../components/providers";
 
 const Register = () => {
   const { replace } = useHistory();
@@ -38,7 +39,7 @@ const Register = () => {
   };
 
   return (
-    <main>
+    <Providers>
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Account details</legend>
@@ -71,7 +72,7 @@ const Register = () => {
           <Link to="/register">Don't have an account? Register</Link>
         </div>
       </form>
-    </main>
+    </Providers>
   );
 };
 
